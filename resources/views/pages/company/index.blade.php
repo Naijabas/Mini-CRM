@@ -20,8 +20,11 @@
             <br>
         </div>
         @endforeach
-        
-        {{-- {{var_dump($companies)}} --}}
+        {{-- {{$companies->links()}} --}}
     </div>
+    <div class="row">
+        {{ $companies->links('vendor.pagination.simple-bootstrap-4') }}
+    </div>
+    
 </div>
 @endsection

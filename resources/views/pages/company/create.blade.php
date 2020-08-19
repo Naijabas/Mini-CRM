@@ -22,7 +22,7 @@
                       </div>
                       <div class="form-group">
                         <label>Company Website</label>
-                        <input type="text" name="website" class="form-control" placeholder="Please Enter The Company Website">
+                        <input type="url" name="website" class="form-control" placeholder="Please Enter The Company Website" required pattern="https?://.+">
                       </div>
                       <form>
                         <div class="form-group">

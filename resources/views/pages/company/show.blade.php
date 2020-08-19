@@ -22,7 +22,7 @@
                     </form>
                     
                 <a href="{{ route('company.edit', $company->id) }}" class="btn btn-secondary ">Edit</a><br><br>
-                <a href="{{ route('employee.create') }}" class="btn btn-primary ">Create Employee</a>
+                <a href="{{ route('employee.create', $company->id) }}" class="btn btn-primary ">Create Employee</a>
                     <div class="right">
                     <br>
                 </div>
@@ -57,9 +57,17 @@
                             <td>{{$employee->email}}</td>
                             <td>{{$employee->phone_number}}</td>
                             <td>
-                                <a class="btn btn-sm btn-info text-white" href="{{ route ('employee.show', $employee->id) }}"><i class="far fa-edit"></i>View</a>
-                                <a class="btn btn-sm btn-primary" href="{{ route ('employee.show', $employee->id) }}"><i class="far fa-edit"></i>Edit</a>
-                                <a class="btn btn-sm btn-danger" href="{{ route ('employee.show', $employee->id) }}"><i class="fas fa-trash-alt"></i>Delete</a>    
+                                <a class="btn btn-sm btn-info text-white" href="{{ route ('employee.show', [$company, $employee]) }}"><i class="far fa-edit"></i>View</a>
+                                <a class="btn btn-sm btn-primary" href="{{ route ('employee.edit', [$company, $employee]) }}"><i class="far fa-edit"></i>Edit</a>
+                                <a class="btn btn-sm btn-danger" href="{{ route('employee.destroy', [$company, $employee]) }}" onclick="event.preventDefault(); document.getElementById('delete-employee').submit();">
+                                    Delete
+                                </a>
+                                
+                                <form id="delete-employee" action="{{ route('employee.destroy', [$company, $employee]) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                                
                             </td>
                           </tr>
                           @endforeach

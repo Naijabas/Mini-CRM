@@ -10,7 +10,7 @@
                     <br>
                     @include('inc.message')
                     <h4>Edit Your Employee</h4>
-                    <form method="POST" action="{{ route('employee.update', $employee->id) }}">
+                    <form method="POST" action="{{ route('employee.update', [$company, $employee]) }}">
                       @csrf
                       @method('PUT')
                       <div class="form-group">

@@ -17,13 +17,13 @@
                 <p>Name: {{$employee->first_name}} {{$employee->last_name}}</p>
                 <p>Email: {{$employee->email}}</p>
                 <p>Phone: {{$employee->phone_number}}</p>
-                <form action="{{route('employee.destroy', $employee->id)}}" method="POST">
+                <form action="{{route('employee.destroy', [$company, $employee])}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger float-right text-white">Delete</button>
                     </form>
                     
-                <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-secondary ">Edit</a><br><br>
+                <a href="{{ route('employee.edit', [$company, $employee]) }}" class="btn btn-secondary ">Edit</a><br><br>
                     <div class="right">
                 </div>
                 </div>

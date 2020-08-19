@@ -10,7 +10,7 @@
                     <br>
                     @include('inc.message')
                     <h4>Create an Employee</h4>
-                    <form method="POST" action="{{ route('employee.store')}}">
+                    <form method="POST" action="{{ route('employee.store', [$company])}}">
                       @csrf
                       <div class="form-group">
                         <label>Employee's First Name</label>

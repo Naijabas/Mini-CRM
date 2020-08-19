@@ -24,7 +24,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::resource('/', 'CompanyController');
     Route::resource('company', 'CompanyController');
-    Route::resource('employee', 'EmployeeController');
+    // Route::resource('employee', 'EmployeeController');
+    Route::resource('/company/{company}/employee', 'EmployeeController');
 });
 // Auth::routes();
 
