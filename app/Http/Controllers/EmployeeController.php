@@ -24,7 +24,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.employee.create');
     }
 
     /**
@@ -35,7 +35,22 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate Request Submitted
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email',
+        ]);
+        $employee = new Employee;
+        $employee->first_name = $request->input('first_name');
+        $employee->last_name = $request->input('last_name');
+        $employee->email = $request->input('email');
+        $employee->user_id = auth()->user()->id;
+        $employee->phone_number = $request->input('phone_number');
+        $employee->save();
+        // Redirect upon Completion
+        return redirect('/company')->with('success', 'Employee Successfully Created');
     }
 
     /**
@@ -46,7 +61,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        return view('employee.index', compact('employee'));
+        return view('pages.employee.show', compact('employee'));
     }
 
     /**
@@ -57,7 +72,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('pages.employee.edit', compact('employee'));
     }
 
     /**
@@ -69,7 +84,25 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        //validate Inputs
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        //Find the company by ID
+        $employee = Employee::find($employee->id);
+        $employee->first_name = $request->input('first_name');
+        $employee->last_name = $request->input('last_name');
+        $employee->phone_number = $request->input('phone_number');
+        $employee->email = $request->input('email');
+        $employee->save();
+
+        //Redirect upon successful editing
+        return redirect('/company')->with('success', 'Employee Successfully Updated');
+        // $company->user_id;
     }
 
     /**
@@ -80,6 +113,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
+        $employee->id;
         $employee->delete();
+        return redirect('/company')->with('success', 'Company Deleted Successfully');
     }
 }
